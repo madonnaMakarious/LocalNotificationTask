@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ViewControllerBDelegate: AnyObject {
-    func setNotification(title: String, timeInSeconds: String)
+    func setNotification(title: String, timeInSeconds: String, isRepeated: Bool)
 }
 class ViewControllerB: UIViewController {
 
@@ -21,11 +21,11 @@ class ViewControllerB: UIViewController {
     @IBOutlet weak var AlertTitle_lbl: UILabel!
     
     @IBAction func repeatNotification_switch(_ sender: UISwitch) {
-//        if sender.isOn{
-//            isRepeated = true
-//        }else{
-//            isRepeated = false
-//        }
+        if sender.isOn{
+            isRepeated = true
+        }else{
+            isRepeated = false
+        }
     }
     @IBAction func scheduleNotification_switch(_ sender: UISwitch) {
         if sender.isOn{
@@ -38,7 +38,7 @@ class ViewControllerB: UIViewController {
     
     @IBAction func SaveActions(_ sender: Any) {
         if isScheduled{
-            delegate?.setNotification(title: alertTitle, timeInSeconds: timeInSeconds)
+            delegate?.setNotification(title: alertTitle, timeInSeconds: timeInSeconds, isRepeated: isRepeated)
             self.navigationController?.popViewController(animated: true)
         }
     }

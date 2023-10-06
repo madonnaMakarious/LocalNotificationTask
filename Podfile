@@ -7,6 +7,5 @@ target 'LocalNotificationTask' do
 
   # Pods for LocalNotificationTask
 
- pod 'XMLParsing'
  pod 'Alamofire'
 end
