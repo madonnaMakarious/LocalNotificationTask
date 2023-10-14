@@ -8,8 +8,8 @@
 import UIKit
 
 protocol ViewControllerBDelegate: AnyObject {
-    func setIsRepeated(isRepeated: Bool, id: Int)
-    func setIsScheduled(isScheduled: Bool, id: Int)
+    func setIsRepeatedOnUserDefaults(isRepeated: Bool, id: Int)
+    func setIsScheduledOnUserDefaults(isScheduled: Bool, id: Int)
     func setNotification(title: String, timeInSeconds: Double, isRepeated: Bool, ID: Int)
 }
 
@@ -27,7 +27,7 @@ class ViewControllerB: BaseVC {
         deleteLocalNotification(identifier: "notification.repeater.\(object.id)")
         if sender.isOn && object.isScheduled{
             object.isRepeated = true
-            delegate?.setIsRepeated(isRepeated: object.isRepeated, id: object.id)
+            delegate?.setIsRepeatedOnUserDefaults(isRepeated: object.isRepeated, id: object.id)
             
             delegate?.setNotification(title: object.title, timeInSeconds: object.timeInSeconds, isRepeated: object.isRepeated, ID: object.id)
             
@@ -36,7 +36,7 @@ class ViewControllerB: BaseVC {
             showAlertMessage(title: "Sorry", msg: "turn on schedule notification first", selfDismissing: true, time: 1)
         }else{
             object.isRepeated = false
-            delegate?.setIsRepeated(isRepeated: object.isRepeated, id: object.id)
+            delegate?.setIsRepeatedOnUserDefaults(isRepeated: object.isRepeated, id: object.id)
         }
         
     }
@@ -48,9 +48,14 @@ class ViewControllerB: BaseVC {
             object.isScheduled = true
             delegate?.setNotification(title: object.title, timeInSeconds: object.timeInSeconds, isRepeated: object.isRepeated, ID: object.id)
         }else{
+            if object.isRepeated{
+                repeatedSwitch.isOn = false
+                deleteLocalNotification(identifier: "notification.repeater.\(object.id)")
+                delegate?.setIsRepeatedOnUserDefaults(isRepeated: object.isRepeated, id: object.id)
+            }
             object.isScheduled = false
         }
-        delegate?.setIsScheduled(isScheduled: object.isScheduled, id: object.id)
+        delegate?.setIsScheduledOnUserDefaults(isScheduled: object.isScheduled, id: object.id)
     }
     
     private func deleteLocalNotification(identifier: String){

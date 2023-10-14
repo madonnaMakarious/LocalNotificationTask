@@ -9,14 +9,14 @@ import UserNotifications
 import Foundation
 
 extension ViewControllerA: ViewControllerBDelegate{
-    func setIsRepeated(isRepeated: Bool, id: Int) {
+    func setIsRepeatedOnUserDefaults(isRepeated: Bool, id: Int) {
         
         guard let item = alertsModel.firstIndex(where: { $0.id == id }) else { return }
         alertsModel[item].isRepeated = isRepeated
         UserDefaults.alerts = alertsModel
     }
     
-    func setIsScheduled(isScheduled: Bool, id: Int) {
+    func setIsScheduledOnUserDefaults(isScheduled: Bool, id: Int) {
         guard let item = alertsModel.firstIndex(where: { $0.id == id }) else { return }
         alertsModel[item].isScheduled = isScheduled
         UserDefaults.alerts = alertsModel

@@ -34,8 +34,6 @@ class ViewControllerA: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         getLocalAlerts()
         
         observer = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [unowned self] notification in
