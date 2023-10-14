@@ -40,15 +40,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
+        // Decide how the notification (that was received in the foreground)
+        // should be presented to the user
+        let userInfo = notification.request.content.userInfo
+        print(userInfo)
         completionHandler([.alert, .badge, .sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("Usrinfo associated with notification == \(response.notification.request.content.userInfo)")
+        // Handle the user interaction with the notification
+        let userInfo = response.notification.request.content.userInfo
+        
+        
+        if let NotificationID = userInfo["NotificationID"] as? Int {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let delegate = windowScene.delegate as? SceneDelegate, let window = delegate.window else { return }
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewControllerA") as! ViewControllerA
+            
+            let nav = UINavigationController(rootViewController: vc)
+            let nextVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewControllerB") as! ViewControllerB
+            
+            nextVC.id = NotificationID
+            
+            vc.navigationController?.pushViewController(nextVC, animated: false)
+            window.rootViewController = nav
+            window.makeKeyAndVisible()
+        }
+        
+        
+        
+        
         
         completionHandler()
     }
-    
 }
-

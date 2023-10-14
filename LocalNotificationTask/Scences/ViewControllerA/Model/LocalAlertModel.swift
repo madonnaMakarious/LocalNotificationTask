@@ -8,6 +8,11 @@
 import Foundation
 
 struct LocalAlertModel: Codable{
-    var title: String
-    var timeInSeconds: String
+    var title: String = ""
+    var timeInSeconds: Double = 0.0
+    var id : Int = 0
+    var isRepeated: Bool = false
+    var isScheduled: Bool = false
+    
+    
 }

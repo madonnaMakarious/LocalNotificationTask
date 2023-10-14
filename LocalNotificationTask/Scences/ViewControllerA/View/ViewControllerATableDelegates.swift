@@ -24,8 +24,8 @@ extension ViewControllerA: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "ViewControllerB") as! ViewControllerB
         nextVC.delegate = self
-        nextVC.alertTitle = alertsModel[indexPath.row].title
-        nextVC.timeInSeconds = alertsModel[indexPath.row].timeInSeconds
+        nextVC.id = alertsModel[indexPath.row].id
+        
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

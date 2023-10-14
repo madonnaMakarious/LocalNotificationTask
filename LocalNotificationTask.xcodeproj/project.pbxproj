@@ -12,6 +12,7 @@
 		7048CC892AD01F1900F7E739 /* ViewControllerB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7048CC882AD01F1900F7E739 /* ViewControllerB.swift */; };
 		706C6D732AD024550096A251 /* XmlDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706C6D722AD024550096A251 /* XmlDelegates.swift */; };
 		706C6D762AD02AA80096A251 /* ViewControllerBDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706C6D752AD02AA80096A251 /* ViewControllerBDelegate.swift */; };
+		70967DAB2ADAA24D002EAB00 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70967DAA2ADAA24D002EAB00 /* UserDefaults.swift */; };
 		709AE8D22AD016910052AFED /* ViewControllerA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709AE8D12AD016910052AFED /* ViewControllerA.swift */; };
 		709AE8D92AD0193B0052AFED /* LocalAlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709AE8D82AD0193B0052AFED /* LocalAlertModel.swift */; };
 		70EC71BA2AD014C300D5E800 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EC71B92AD014C300D5E800 /* AppDelegate.swift */; };
@@ -28,6 +29,7 @@
 		7048CC882AD01F1900F7E739 /* ViewControllerB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerB.swift; sourceTree = "<group>"; };
 		706C6D722AD024550096A251 /* XmlDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmlDelegates.swift; sourceTree = "<group>"; };
 		706C6D752AD02AA80096A251 /* ViewControllerBDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerBDelegate.swift; sourceTree = "<group>"; };
+		70967DAA2ADAA24D002EAB00 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		709AE8D12AD016910052AFED /* ViewControllerA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerA.swift; sourceTree = "<group>"; };
 		709AE8D82AD0193B0052AFED /* LocalAlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlertModel.swift; sourceTree = "<group>"; };
 		70EC71B62AD014C300D5E800 /* LocalNotificationTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalNotificationTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +70,14 @@
 				7048CC882AD01F1900F7E739 /* ViewControllerB.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		70967DAC2ADAA250002EAB00 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				70967DAA2ADAA24D002EAB00 /* UserDefaults.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		709AE8CF2AD016750052AFED /* ViewControllerA */ = {
@@ -119,6 +129,7 @@
 		70EC71B82AD014C300D5E800 /* LocalNotificationTask */ = {
 			isa = PBXGroup;
 			children = (
+				70967DAC2ADAA250002EAB00 /* Extensions */,
 				70EC71CD2AD0153900D5E800 /* Scences */,
 				70EC71B92AD014C300D5E800 /* AppDelegate.swift */,
 				70EC71BB2AD014C300D5E800 /* SceneDelegate.swift */,
@@ -286,6 +297,7 @@
 				709AE8D22AD016910052AFED /* ViewControllerA.swift in Sources */,
 				706C6D762AD02AA80096A251 /* ViewControllerBDelegate.swift in Sources */,
 				706C6D732AD024550096A251 /* XmlDelegates.swift in Sources */,
+				70967DAB2ADAA24D002EAB00 /* UserDefaults.swift in Sources */,
 				7048CC832AD01DAC00F7E739 /* ViewControllerATableDelegates.swift in Sources */,
 				7048CC892AD01F1900F7E739 /* ViewControllerB.swift in Sources */,
 				70EC71D02AD0155F00D5E800 /* BaseClass.swift in Sources */,

@@ -9,37 +9,58 @@ import UserNotifications
 import Foundation
 
 extension ViewControllerA: ViewControllerBDelegate{
-    func setNotification(title: String, timeInSeconds: String, isRepeated: Bool){
+    func setIsRepeated(isRepeated: Bool, id: Int) {
         
+        guard let item = alertsModel.firstIndex(where: { $0.id == id }) else { return }
+        alertsModel[item].isRepeated = isRepeated
+        UserDefaults.alerts = alertsModel
+    }
+    
+    func setIsScheduled(isScheduled: Bool, id: Int) {
+        guard let item = alertsModel.firstIndex(where: { $0.id == id }) else { return }
+        alertsModel[item].isScheduled = isScheduled
+        UserDefaults.alerts = alertsModel
+    }
+    
+    func setNotification(title: String, timeInSeconds: Double, isRepeated: Bool, ID: Int){
+        
+        var defaultSeconds = timeInSeconds
+        if defaultSeconds < 60{
+            defaultSeconds = 60
+        }
         
         let content = UNMutableNotificationContent()
         content.title = title
         content.sound = UNNotificationSound.default
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval:  Date().addingTimeInterval(Double(timeInSeconds) ?? 1.0).timeIntervalSinceNow, repeats: false)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        content.userInfo = ["NotificationID": ID]
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval:  Date().addingTimeInterval(timeInSeconds).timeIntervalSinceNow, repeats: false)
         
+        let request = UNNotificationRequest(identifier: "notification.start.\(ID)", content: content, trigger: trigger)
         
         
         UNUserNotificationCenter.current().add(request) {(error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
-                    if isRepeated{
-                        if let firstRepeatingDate = Calendar.current.date(byAdding: .day, value: 1, to: Date().addingTimeInterval(Double(timeInSeconds) ?? 1.0)) {
-                            let repeatingTrigger = UNTimeIntervalNotificationTrigger(timeInterval: firstRepeatingDate.timeIntervalSinceNow, repeats: true)
-                            let repeatingRequest = UNNotificationRequest(identifier: "notification.repeater", content: content, trigger: repeatingTrigger)
-                            UNUserNotificationCenter.current().add(repeatingRequest) { (error) in
-                                if let error = error {
-                                    print("Error adding repeating notification: \(error.localizedDescription)")
-                                } else {
-                                    print("Successfully scheduled")
-                                }
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if isRepeated{
+                    if let firstRepeatingDate = Calendar.current.date(byAdding: .second, value: Int(defaultSeconds), to: Date().addingTimeInterval(timeInSeconds)) {
+                        let repeatingTrigger = UNTimeIntervalNotificationTrigger(timeInterval: firstRepeatingDate.timeIntervalSinceNow, repeats: true)
+                        let repeatingRequest = UNNotificationRequest(identifier: "notification.repeater.\(ID)", content: content, trigger: repeatingTrigger)
+                        UNUserNotificationCenter.current().add(repeatingRequest) { (error) in
+                            if let error = error {
+                                print("Error adding repeating notification: \(error.localizedDescription)")
+                            } else {
+                                print("Successfully scheduled")
                             }
                         }
                     }
-                    
                 }
+                
             }
-
+        }
+        
+        
     }
+    
+    
 }
